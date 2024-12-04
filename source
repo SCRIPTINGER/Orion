@@ -68,6 +68,35 @@ function SimpleUILib:AddTextbox(tabName, textboxName, callback)
             callback(TextBox.Text)
         end
     end)
+local frame = script.Parent -- Ссылка на родительский Frame
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+-- Функция для начала перетаскивания
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+-- Функция для перемещения
+game:GetService("RunService").RenderStepped:Connect(function()
+    if dragging then
+        local delta = mouse.X - dragStart.X
+        frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta, startPos.Y.Scale, startPos.Y.Offset)
+    end
+end)
 end
 
 return SimpleUILib
