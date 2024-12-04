@@ -2,3 +2,46 @@ local MobilePCMover = require(game.ServerScriptService.MobilePCMover)
 
 local myObject = script.Parent -- замените на ваш объект
 local mover = MobilePCMover.new(myObject)
+local MobilePCMover = {}
+MobilePCMover.__index = MobilePCMover
+
+function MobilePCMover.new(object)
+    local self = setmetatable({}, MobilePCMover)
+    self.object = object
+    self.isMoving = false
+
+    -- Обработчики событий
+    self:setupInputHandlers()
+    return self
+end
+
+function MobilePCMover:setupInputHandlers()
+    -- Для ПК
+    self.object.MouseButton1Down:Connect(function()
+        self.isMoving = true
+    end)
+
+    self.object.MouseButton1Up:Connect(function()
+        self.isMoving = false
+    end)
+
+    game:GetService("UserInputService").InputChanged:Connect(function(input)
+        if self.isMoving and input.UserInputType == Enum.UserInputType.MouseMovement then
+            self.object.Position = UDim2.new(0, input.Position.X, 0, input.Position.Y)
+        end
+    end)
+
+    -- Для мобильных устройств
+    self.object.TouchTap:Connect(function(touch)
+        self.isMoving = true
+        self.object.Position = UDim2.new(0, touch.Position.X, 0, touch.Position.Y)
+    end)
+
+    game:GetService("UserInputService").TouchChanged:Connect(function(touch, change)
+        if self.isMoving and touch.UserInputType == Enum.UserInputType.Touch then
+            self.object.Position = UDim2.new(0, change.Position.X, 0, change.Position.Y)
+        end
+    end)
+end
+
+return MobilePCMover
