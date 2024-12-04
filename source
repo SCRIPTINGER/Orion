@@ -1,5 +1,3 @@
--- RELKINLibrary.lua (Module Script)
-
 local RELKINLibrary = {}
 RELKINLibrary.__index = RELKINLibrary
 
@@ -69,11 +67,43 @@ function RELKINLibrary:Create()
 
     createInstance("UICorner", {}, Name)
     createInstance("UIAspectRatioConstraint", { AspectRatio = 13.833 }, Name)
-    createInstance("UITextSizeConstraint", { MaxTextSize = 50 }, Name)
 
     createInstance("UIAspectRatioConstraint", { AspectRatio = 1.335 }, hub)
     createInstance("UIAspectRatioConstraint", { AspectRatio = 1.330 }, GUI)
     createInstance("UIAspectRatioConstraint", { AspectRatio = 2.326 }, library)
+
+    -- Create Buttons
+    local Button1 = createInstance("TextButton", {
+        Name = "Button1",
+        BackgroundColor3 = Color3.fromRGB(255, 0, 0),
+        Position = UDim2.new(0.1, 0, 0.2, 0),
+        Size = UDim2.new(0.3, 0, 0.1, 0),
+        Font = Enum.Font.SourceSans,
+        Text = "Button 1",
+        TextColor3 = Color3.fromRGB(255, 255, 255),
+        TextSize = 24,
+        [ "AutoButtonColor" ] = false -- Prevents button from changing color on hover
+    }, hub)
+
+    local Button2 = createInstance("TextButton", {
+        Name = "Button2",
+        BackgroundColor3 = Color3.fromRGB(0, 0, 255),
+        Position = UDim2.new(0.5, 0, 0.2, 0),
+        Size = UDim2.new(0.3, 0, 0.1, 0),
+        Font = Enum.Font.SourceSans,
+        Text = "Button 2",
+        TextColor3 = Color3.fromRGB(255, 255, 255),
+        TextSize = 24,
+        [ "AutoButtonColor" ] = false -- Prevents button from changing color on hover
+    }, hub)
+
+    Button1.MouseButton1Click:Connect(function()
+        print("Button 1 clicked!")
+    end)
+
+    Button2.MouseButton1Click:Connect(function()
+        print("Button 2 clicked!")
+    end)
 
     self:SetupDragging(hub) -- Setup dragging for the 'hub' frame
 
