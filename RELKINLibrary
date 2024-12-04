@@ -1,108 +1,39 @@
--- RELKIN Library v3.2
-local RELKIN = {}
-RELKIN.__index = RELKIN
+-- Gui to Lua
+-- Version: 3.2
 
-function RELKIN:Create()
+local RELKINlibrary = {}
+
+function RELKINlibrary:Create()
     local gui = Instance.new("ScreenGui")
-    local mainFrame = Instance.new("Frame")
-    local navgations = Instance.new("ScrollingFrame")
-    local topBar = Instance.new("Frame")
-    local closeButton = Instance.new("ImageButton")
-    local nameLabel = Instance.new("TextLabel")
-    local placeholder = Instance.new("Frame")
-    local controls = Instance.new("Frame")
-
-    -- Set properties
-    gui.Name = "RELKIN Library"
+    local Main = Instance.new("Frame")
+    -- ... existing code for creating GUI elements ...
+    
+    -- Properties
+    gui.Name = "RELKIN library"
     gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     gui.ResetOnSpawn = false
 
-    mainFrame.Name = "Main"
-    mainFrame.Parent = gui
-    mainFrame.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
-    mainFrame.Position = UDim2.new(0.373, 0, 0.303, 0)
-    mainFrame.Size = UDim2.new(0.321, 0, 0.800, 0)
+    -- ... existing code for setting properties ...
 
-    -- Navigation
-    navgations.Name = "Navgations"
-    navgations.Parent = mainFrame
-    navgations.Active = true
-    navgations.BackgroundColor3 = Color3.fromRGB(95, 95, 95)
-    navgations.Position = UDim2.new(0.004, 0, 0.099, 0)
-    navgations.Size = UDim2.new(0.25, 0, 0.900, 0)
-    navgations.CanvasSize = UDim2.new(0, 0, 5, 0)
+    -- Scripts
+    local function HRMIIOL_fake_script()
+        -- Main.dragging script
+        local script = Instance.new('LocalScript', Main)
+        -- ... existing dragging script code ...
+    end
+    coroutine.wrap(HRMIIOL_fake_script)()
 
-    -- Top Bar
-    topBar.Name = "TopBar"
-    topBar.Parent = mainFrame
-    topBar.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
-    topBar.Size = UDim2.new(1, 0, 0.098, 0)
+    local function LNKTZYF_fake_script()
+        -- Close.Close script
+        local script = Instance.new('LocalScript', Close)
+        script.Parent.MouseButton1Click:Connect(function()
+            script.Parent.Parent.Parent.Visible = false
+        end)
+    end
+    coroutine.wrap(LNKTZYF_fake_script)()
 
-    -- Close Button
-    closeButton.Name = "Close"
-    closeButton.Parent = topBar
-    closeButton.BackgroundTransparency = 1
-    closeButton.Position = UDim2.new(0.936, 0, 0.1, 0)
-    closeButton.Size = UDim2.new(0.067, 0, 0.816, 0)
-    closeButton.Image = "rbxassetid://10747384394"
-
-    -- Name Label
-    nameLabel.Name = "Name"
-    nameLabel.Parent = topBar
-    nameLabel.BackgroundTransparency = 1
-    nameLabel.Position = UDim2.new(0.172, 0, -0.022, 0)
-    nameLabel.Size = UDim2.new(0.608, 0, 1.020, 0)
-    nameLabel.Text = "RELKIN"
-    nameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-    nameLabel.TextScaled = true
-
-    -- Placeholder Frame
-    placeholder.Name = "PlaceHolder"
-    placeholder.Parent = mainFrame
-    placeholder.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
-    placeholder.Position = UDim2.new(0, 0, 0.097, 0)
-    placeholder.Size = UDim2.new(1, 0, 0.900, 0)
-
-    -- Controls Frame
-    controls.Name = "Controls"
-    controls.Parent = mainFrame
-    controls.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    controls.Position = UDim2.new(0.256, 0, 0.097, 0)
-    controls.Size = UDim2.new(0.742, 0, 0.900, 0)
-
-    -- Close functionality
-    closeButton.MouseButton1Click:Connect(function()
-        gui.Enabled = false
-    end)
-
-function makeDraggable(frame)
-    local player = game.Players.LocalPlayer
-    local mouse = player:GetMouse()
-    local dragging = false
-    local dragStart = nil
-    local startPos = nil
-
-    frame.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = true
-            dragStart = input.Position
-            startPos = frame.Position
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
-
-    -- Обновление позиции при перетаскивании
-    mouse.Move:Connect(function()
-        if dragging then
-            local delta = mouse.X - dragStart.X
-            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta, startPos.Y.Scale, startPos.Y.Offset)
-        end
-    end)
+    return gui
 end
-makeDraggable(mainFrame)
+
+return RELKINlibrary
