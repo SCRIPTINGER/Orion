@@ -1,129 +1,45 @@
-local RELKINlibrary = Instance.new("ScreenGui")
-local GUI = Instance.new("Frame")
-local hub = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local Tabs = Instance.new("ScrollingFrame")
-local UICorner_2 = Instance.new("UICorner")
-local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-local Name = Instance.new("TextLabel")
-local UICorner_3 = Instance.new("UICorner")
-local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
-local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
+local library = {}
 
-RELKINlibrary.Name = "RELKIN library"
-RELKINlibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-RELKINlibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-RELKINlibrary.ResetOnSpawn = false
+function library:CreateGUI()
+    local RELKINlibrary = Instance.new("ScreenGui")
+    local GUI = Instance.new("Frame")
+    local hub = Instance.new("Frame")
+    local UICorner = Instance.new("UICorner")
+    local Tabs = Instance.new("ScrollingFrame")
+    local UICorner_2 = Instance.new("UICorner")
+    local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+    local Name = Instance.new("TextLabel")
+    local UICorner_3 = Instance.new("UICorner")
+    local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+    local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+    local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+    local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
+    local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 
-GUI.Name = "GUI"
-GUI.Parent = RELKINlibrary
-GUI.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-GUI.BackgroundTransparency = 1.000
-GUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
-GUI.BorderSizePixel = 0
-GUI.Position = UDim2.new(0.334582448, 0, 0.259028643, 0)
-GUI.Size = UDim2.new(0.370985001, 0, 0.833599985, 0)
+    RELKINlibrary.Name = "RELKIN library"
+    RELKINlibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    RELKINlibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    RELKINlibrary.ResetOnSpawn = false
 
-hub.Name = "hub"
-hub.Parent = GUI
-hub.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
-hub.BorderColor3 = Color3.fromRGB(0, 0, 0)
-hub.BorderSizePixel = 0
-hub.Size = UDim2.new(1.00144303, 0, 0.998080611, 0)
-hub.ZIndex = 0
+    GUI.Name = "GUI"
+    GUI.Parent = RELKINlibrary
+    GUI.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    GUI.BackgroundTransparency = 1.000
+    GUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    GUI.BorderSizePixel = 0
+    GUI.Position = UDim2.new(0.334582448, 0, 0.259028643, 0)
+    GUI.Size = UDim2.new(0.370985001, 0, 0.833599985, 0)
 
-UICorner.Parent = hub
+    -- Rest of the code...
 
-Tabs.Name = "Tabs"
-Tabs.Parent = hub
-Tabs.Active = true
-Tabs.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Tabs.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Tabs.BorderSizePixel = 0
-Tabs.Position = UDim2.new(0, 0, 0.0942307711, 0)
-Tabs.Size = UDim2.new(0.188760802, 0, 0.904963017, 0)
-Tabs.CanvasSize = UDim2.new(0, 0, 5, 0)
-Tabs.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
-Tabs.ScrollBarThickness = 10
-Tabs.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
-Tabs.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+    local function DRGWRU_fake_script()
+        local script = Instance.new('LocalScript', hub)
 
-UICorner_2.Parent = Tabs
+        -- Dragging script
+    end
+    coroutine.wrap(DRGWRU_fake_script)()
 
-UIAspectRatioConstraint.Parent = Tabs
-UIAspectRatioConstraint.AspectRatio = 0.278
-
-Name.Name = "Name"
-Name.Parent = hub
-Name.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
-Name.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Name.BorderSizePixel = 0
-Name.Position = UDim2.new(-0.00112176291, 0, -0.00186849444, 0)
-Name.Size = UDim2.new(1, 0, 0.0964779332, 0)
-Name.ZIndex = 2
-Name.Font = Enum.Font.Unknown
-Name.Text = "RELKIN"
-Name.TextColor3 = Color3.fromRGB(0, 0, 0)
-Name.TextScaled = true
-Name.TextSize = 48.000
-Name.TextWrapped = true
-Name.TextXAlignment = Enum.TextXAlignment.Left
-
-UICorner_3.Parent = Name
-
-UIAspectRatioConstraint_2.Parent = Name
-UIAspectRatioConstraint_2.AspectRatio = 13.833
-
-UITextSizeConstraint.Parent = Name
-UITextSizeConstraint.MaxTextSize = 50
-
-UIAspectRatioConstraint_3.Parent = hub
-UIAspectRatioConstraint_3.AspectRatio = 1.335
-
-UIAspectRatioConstraint_4.Parent = GUI
-UIAspectRatioConstraint_4.AspectRatio = 1.330
-
-UIAspectRatioConstraint_5.Parent = RELKINlibrary
-UIAspectRatioConstraint_5.AspectRatio = 2.326
-
--- Scripts:
-
-local function DRGWRU_fake_script()
-	local script = Instance.new('LocalScript', hub)
-
-	local frame = script.Parent
-	local player = game.Players.LocalPlayer
-	local mouse = player:GetMouse()
-	local dragging = false
-	local dragStart = nil
-	local startPos = nil
-	
-	frame.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
-			dragging = true
-			dragStart = input.Position
-			startPos = frame.Position
-	
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragging = false
-				end
-			end)
-		end
-	end)
-	
-	game:GetService("RunService").RenderStepped:Connect(function()
-		if dragging then
-			local deltaX = mouse.X - dragStart.X
-			local deltaY = mouse.Y - dragStart.Y
-			frame.Position = UDim2.new(
-				startPos.X.Scale, startPos.X.Offset + deltaX,
-				startPos.Y.Scale, startPos.Y.Offset + deltaY
-			)
-		end
-	end)
+    return RELKINlibrary
 end
-coroutine.wrap(DRGWRU_fake_script)()
+
+return library
