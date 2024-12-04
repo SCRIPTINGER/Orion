@@ -2,90 +2,98 @@
 local RELKINLibrary = {}
 RELKINLibrary.__index = RELKINLibrary
 
-local PlayerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-function RELKINLibrary:new()
+-- Initialize the GUI
+function RELKINLibrary.new()
     local self = setmetatable({}, RELKINLibrary)
-    
-    -- Instances
-    self.screenGui = Instance.new("ScreenGui")
-    self.mainFrame = Instance.new("Frame")
-    self.topBar = Instance.new("Frame")
-    self.closeButton = Instance.new("ImageButton")
-    self.nameLabel = Instance.new("TextLabel")
-    self.navgations = Instance.new("ScrollingFrame")
-    self.placeHolder = Instance.new("Frame")
-    
-    -- Setup Properties
-    self:setupGui()
+
+    -- Create instances and properties
+    self.GUI = Instance.new("ScreenGui")
+    self.Main = Instance.new("Frame")
+    self.Navgations = Instance.new("ScrollingFrame")
+    self.Tab1 = Instance.new("TextButton")
+    self.Tab2 = Instance.new("TextButton")
+    self.TopBar = Instance.new("Frame")
+    self.Close = Instance.new("ImageButton")
+    self.NameLabel = Instance.new("TextLabel")
+    self.Controls = Instance.new("Frame")
+
+    self:setupGUI()
     
     return self
 end
 
-function RELKINLibrary:setupGui()
-    self.screenGui.Name = "RELKIN Library"
-    self.screenGui.Parent = PlayerGui
-    self.screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    self.screenGui.ResetOnSpawn = false
+-- Setup the GUI elements
+function RELKINLibrary:setupGUI()
+    self.GUI.Name = "RELKIN library"
+    self.GUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    self.GUI.ResetOnSpawn = false
 
-    -- Main Frame Setup
-    self.mainFrame.Name = "Main"
-    self.mainFrame.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
-    self.mainFrame.Position = UDim2.new(0.373, 0, 0.302, 0)
-    self.mainFrame.Size = UDim2.new(0.321, 0, 0.8, 0)
-    self.mainFrame.Parent = self.screenGui
-    
-    -- Top Bar Setup
-    self.topBar.Name = "TopBar"
-    self.topBar.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
-    self.topBar.Size = UDim2.new(1, 0, 0.1, 0)
-    self.topBar.Parent = self.mainFrame
-    
-    -- Close Button Setup
-    self.closeButton.Name = "Close"
-    self.closeButton.BackgroundTransparency = 1
-    self.closeButton.Position = UDim2.new(0.93, 0, 0.1, 0)
-    self.closeButton.Size = UDim2.new(0.067, 0, 0.816, 0)
-    self.closeButton.Image = "rbxassetid://10747384394"
-    self.closeButton.Parent = self.topBar
+    self.Main.Name = "Main"
+    self.Main.Parent = self.GUI
+    self.Main.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
+    self.Main.Size = UDim2.new(0.32, 0, 0.8, 0)
+    self.Main.Position = UDim2.new(0.37, 0, 0.30, 0)
 
-    -- Name Label Setup
-    self.nameLabel.Name = "Name"
-    self.nameLabel.Text = "RELKIN"
-    self.nameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-    self.nameLabel.Size = UDim2.new(0.608, 0, 1.02, 0)
-    self.nameLabel.Parent = self.topBar
+    self.Navgations.Name = "Navgations"
+    self.Navgations.Parent = self.Main
+    self.Navgations.Active = true
+    self.Navgations.BackgroundColor3 = Color3.fromRGB(95, 95, 95)
+    self.Navgations.Size = UDim2.new(0.25, 0, 0.9, 0)
 
-    -- Navigation Setup
-    self.navgations.Name = "Navgations"
-    self.navgations.BackgroundColor3 = Color3.fromRGB(95, 95, 95)
-    self.navgations.Size = UDim2.new(0.25, 0, 0.9, 0)
-    self.navgations.Position = UDim2.new(0.003, 0, 0.1, 0)
-    self.navgations.Parent = self.mainFrame
-    
-    -- Place Holder Setup
-    self.placeHolder.Name = "PlaceHolder"
-    self.placeHolder.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
-    self.placeHolder.Size = UDim2.new(1, 0, 0.9, 0)
-    self.placeHolder.Position = UDim2.new(0, 0, 0.1, 0)
-    self.placeHolder.Parent = self.mainFrame
+    self.Tab1.Name = "Tab 1"
+    self.Tab1.Parent = self.Navgations
+    self.Tab1.Text = "Home"
+    self.Tab1.Size = UDim2.new(0, 150, 0, 30)
 
-    -- Dragging Functionality
-    self:makeDraggable(self.mainFrame)
+    self.Tab2.Name = "Tab 2"
+    self.Tab2.Parent = self.Navgations
+    self.Tab2.Text = "Settings"
+    self.Tab2.Position = UDim2.new(0, 0, 0.065, 0)
+    self.Tab2.Size = UDim2.new(0, 150, 0, 30)
 
-    -- Close Functionality
-    self.closeButton.MouseButton1Click:Connect(function()
-        self.screenGui.Visible = false
-    end)
+    self.TopBar.Name = "TopBar"
+    self.TopBar.Parent = self.Main
+    self.TopBar.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
+    self.TopBar.Size = UDim2.new(1, 0, 0.1, 0)
+
+    self.Close.Name = "Close"
+    self.Close.Parent = self.TopBar
+    self.Close.Image = "rbxassetid://10747384394"
+    self.Close.Size = UDim2.new(0.07, 0, 0.8, 0)
+    self.Close.Position = UDim2.new(0.93, 0, 0.1, 0)
+
+    self.NameLabel.Name = "Name"
+    self.NameLabel.Parent = self.TopBar
+    self.NameLabel.Text = "RELKIN"
+    self.NameLabel.Size = UDim2.new(0.6, 0, 1, 0)
+    self.NameLabel.Position = UDim2.new(0.17, 0, 0, 0)
+
+    self.Controls.Name = "Controls"
+    self.Controls.Parent = self.Main
+    self.Controls.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    self.Controls.Position = UDim2.new(0.26, 0, 0.096, 0)
+    self.Controls.Size = UDim2.new(0.74, 0, 0.9, 0)
+
+    -- Connect events
+    self:connectEvents()
 end
 
-function RELKINLibrary:makeDraggable(frame)
+-- Connect the button events
+function RELKINLibrary:connectEvents()
+    self.Close.MouseButton1Click:Connect(function()
+        self.GUI.Enabled = false
+    end)
+
+    self:initializeDrag(self.Main)
+end
+-- Function for draggable UI
+function RELKINLibrary:initializeDrag(frame)
     local player = game.Players.LocalPlayer
     local mouse = player:GetMouse()
     local dragging = false
     local dragStart = nil
     local startPos = nil
-
+    
     frame.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = true
@@ -93,4 +101,19 @@ function RELKINLibrary:makeDraggable(frame)
             startPos = frame.Position
 
             input.Changed:Connect(function()
-                if input.UserInputState
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
+            if dragging then
+                local newPosition = UDim2.new(startPos.X.Scale, startPos.X.Offset + (mouse.X - dragStart.X), startPos.Y.Scale, startPos.Y.Offset + (mouse.Y - dragStart.Y))
+                frame.Position = newPosition
+            end
+        end
+    end)
+end
