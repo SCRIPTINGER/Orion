@@ -1,0 +1,4 @@
+local MobilePCMover = require(game.ServerScriptService.MobilePCMover)
+
+local myObject = script.Parent -- замените на ваш объект
+local mover = MobilePCMover.new(myObject)
