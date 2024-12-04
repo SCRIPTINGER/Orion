@@ -1,45 +1,177 @@
-local library = {}
+local RELKINlibrary = Instance.new("ScreenGui")
+local GUI = Instance.new("Frame")
+local hub = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local Tabs = Instance.new("ScrollingFrame")
+local UICorner_2 = Instance.new("UICorner")
+local Name = Instance.new("TextLabel")
+local UICorner_3 = Instance.new("UICorner")
 
-function library:CreateGUI()
-    local RELKINlibrary = Instance.new("ScreenGui")
-    local GUI = Instance.new("Frame")
-    local hub = Instance.new("Frame")
-    local UICorner = Instance.new("UICorner")
-    local Tabs = Instance.new("ScrollingFrame")
-    local UICorner_2 = Instance.new("UICorner")
-    local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-    local Name = Instance.new("TextLabel")
-    local UICorner_3 = Instance.new("UICorner")
-    local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
-    local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-    local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
-    local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
-    local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
+RELKINlibrary.Name = "RELKIN library"
+RELKINlibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+RELKINlibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+RELKINlibrary.ResetOnSpawn = false
 
-    RELKINlibrary.Name = "RELKIN library"
-    RELKINlibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    RELKINlibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    RELKINlibrary.ResetOnSpawn = false
+GUI.Name = "GUI"
+GUI.Parent = RELKINlibrary
+GUI.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+GUI.BackgroundTransparency = 1.000
+GUI.Position = UDim2.new(0.334582448, 0, 0.259028643, 0)
+GUI.Size = UDim2.new(0.370985001, 0, 0.833599985, 0)
 
-    GUI.Name = "GUI"
-    GUI.Parent = RELKINlibrary
-    GUI.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    GUI.BackgroundTransparency = 1.000
-    GUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    GUI.BorderSizePixel = 0
-    GUI.Position = UDim2.new(0.334582448, 0, 0.259028643, 0)
-    GUI.Size = UDim2.new(0.370985001, 0, 0.833599985, 0)
+hub.Name = "hub"
+hub.Parent = GUI
+hub.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
+hub.Size = UDim2.new(1, 0, 1, 0)
 
-    -- Rest of the code...
+UICorner.Parent = hub
 
-    local function DRGWRU_fake_script()
-        local script = Instance.new('LocalScript', hub)
+Tabs.Name = "Tabs"
+Tabs.Parent = hub
+Tabs.Active = true
+Tabs.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Tabs.Position = UDim2.new(0, 0, 0.0942307711, 0)
+Tabs.Size = UDim2.new(0.188760802, 0, 0.904963017, 0)
+Tabs.CanvasSize = UDim2.new(0, 0, 5, 0)
 
-        -- Dragging script
-    end
-    coroutine.wrap(DRGWRU_fake_script)()
+UICorner_2.Parent = Tabs
 
-    return RELKINlibrary
+Name.Name = "Name"
+Name.Parent = hub
+Name.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
+Name.Size = UDim2.new(1, 0, 0.0964779332, 0)
+Name.Font = Enum.Font.Unknown
+Name.Text = "RELKIN"
+Name.TextColor3 = Color3.fromRGB(0, 0, 0)
+Name.TextScaled = true
+
+UICorner_3.Parent = Name
+
+-- Функция для создания кнопки
+function CreateButton(name, parent, callback)
+    local button = Instance.new("TextButton")
+    button.Name = name
+    button.Parent = parent
+    button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    button.Size = UDim2.new(1, 0, 0, 50)
+    button.Text = name
+    button.TextColor3 = Color3.fromRGB(0, 0, 0)
+
+    button.MouseButton1Click:Connect(function()
+        callback()
+    end)
+
+    return button
 end
 
-return library
+-- Функция для создания переключателя (toggle)
+function CreateToggle(name, parent, callback)
+    local toggleFrame = Instance.new("Frame")
+    toggleFrame.Name = name
+    toggleFrame.Parent = parent
+    toggleFrame.Size = UDim2.new(1, 0, 0, 50)
+    toggleFrame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+
+    local toggleButton = Instance.new("TextButton")
+    toggleButton.Size = UDim2.new(0.5, 0, 1, 0)
+    toggleButton.Text = "Off"
+    toggleButton.Parent = toggleFrame
+
+    local isToggled = false
+
+    toggleButton.MouseButton1Click:Connect(function()
+        isToggled = not isToggled
+        toggleButton.Text = isToggled and "On" or "Off"
+        callback(isToggled)
+    end)
+
+    return toggleFrame
+end
+
+-- Функция для создания слайдера
+function CreateSlider(name, parent, min, max, callback)
+    local sliderFrame = Instance.new("Frame")
+    sliderFrame.Name = name
+    sliderFrame.Parent = parent
+    sliderFrame.Size = UDim2.new(1, 0, 0, 50)
+    sliderFrame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+
+    local slider = Instance.new("TextButton")
+    slider.Size = UDim2.new(1, 0, 1, 0)
+    slider.Text = name .. ": " .. min
+    slider.Parent = sliderFrame
+
+    slider.MouseButton1Down:Connect(function()
+        local function updateSlider(input)
+            local value = math.clamp(math.floor((input.Position.X - slider.AbsolutePosition.X) / slider.AbsoluteSize.X * (max - min) + min), min, max)
+            slider.Text = name .. ": " .. value
+            callback(value)
+        end
+
+        local connection
+        connection = game:GetService("UserInputService").InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement then
+                updateSlider(input)
+            end
+        end)
+
+        game:GetService("UserInputService").InputEnded:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                connection:Disconnect()
+            end
+        end)
+    end)
+
+    return sliderFrame
+end
+
+-- Пример использования
+CreateButton("Test Button", hub, function()
+    print("Button clicked!")
+end)
+
+CreateToggle("Test Toggle", hub, function(toggled)
+    print("Toggle is now: " .. tostring(toggled))
+end)
+
+CreateSlider("Test Slider", hub, 0, 100, function(value)
+    print("Slider value: " .. value)
+end)
+
+-- Драггинг GUI
+local function DRGWRU_fake_script()
+    local script = Instance.new('LocalScript', hub)
+    local frame = script.Parent
+    local player = game.Players.LocalPlayer
+    local mouse = player:GetMouse()
+    local dragging = false
+    local dragStart = nil
+    local startPos = nil
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if dragging then
+            local deltaX = mouse.X - dragStart.X
+            local deltaY = mouse.Y - dragStart.Y
+            frame.Position = UDim2.new(
+                startPos.X.Scale, startPos.X.Offset + deltaX,
+                startPos.Y.Scale, startPos.Y.Offset + deltaY
+            )
+        end
+    end)
+end
+
+coroutine.wrap(DRGWRU_fake_script)()
