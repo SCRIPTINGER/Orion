@@ -1,98 +1,129 @@
--- RELKINLibrary.lua
-local RELKINLibrary = {}
-RELKINLibrary.__index = RELKINLibrary
+local RELKINlibrary = Instance.new("ScreenGui")
+local GUI = Instance.new("Frame")
+local hub = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local Tabs = Instance.new("ScrollingFrame")
+local UICorner_2 = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+local Name = Instance.new("TextLabel")
+local UICorner_3 = Instance.new("UICorner")
+local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 
--- Создание GUI
-function RELKINLibrary.new()
-    local self = setmetatable({}, RELKINLibrary)
+RELKINlibrary.Name = "RELKIN library"
+RELKINlibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+RELKINlibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+RELKINlibrary.ResetOnSpawn = false
 
-    self.screenGui = Instance.new("ScreenGui")
-    self.gui = Instance.new("Frame")
-    self.hub = Instance.new("Frame")
-    self.uICorner = Instance.new("UICorner")
-    self.tabs = Instance.new("ScrollingFrame")
-    self.nameLabel = Instance.new("TextLabel")
-    
-    -- Настройка ScreenGui
-    self.screenGui.Name = "RELKIN library"
-    self.screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    self.screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    self.screenGui.ResetOnSpawn = false
+GUI.Name = "GUI"
+GUI.Parent = RELKINlibrary
+GUI.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+GUI.BackgroundTransparency = 1.000
+GUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GUI.BorderSizePixel = 0
+GUI.Position = UDim2.new(0.334582448, 0, 0.259028643, 0)
+GUI.Size = UDim2.new(0.370985001, 0, 0.833599985, 0)
 
-    -- Настройка главного GUI Frame
-    self.gui.Name = "GUI"
-    self.gui.Parent = self.screenGui
-    self.gui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    self.gui.BackgroundTransparency = 1
-    self.gui.Position = UDim2.new(0.334582448, 0, 0.259028643, 0)
-    self.gui.Size = UDim2.new(0.370985001, 0, 0.833599985, 0)
+hub.Name = "hub"
+hub.Parent = GUI
+hub.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
+hub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+hub.BorderSizePixel = 0
+hub.Size = UDim2.new(1.00144303, 0, 0.998080611, 0)
+hub.ZIndex = 0
 
-    -- Настройка хаба
-    self.hub.Name = "hub"
-    self.hub.Parent = self.gui
-    self.hub.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
-    self.hub.Size = UDim2.new(1, 0, 1, 0)
-    
-    self.uICorner.Parent = self.hub
+UICorner.Parent = hub
 
-    -- Настройка вкладок
-    self.tabs.Name = "Tabs"
-    self.tabs.Parent = self.hub
-    self.tabs.Active = true
-    self.tabs.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    self.tabs.Position = UDim2.new(0, 0, 0.0942307711, 0)
-    self.tabs.Size = UDim2.new(0.188760802, 0, 0.904963017, 0)
-    self.tabs.CanvasSize = UDim2.new(0, 0, 5, 0)
-    self.tabs.ScrollBarThickness = 10
+Tabs.Name = "Tabs"
+Tabs.Parent = hub
+Tabs.Active = true
+Tabs.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Tabs.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Tabs.BorderSizePixel = 0
+Tabs.Position = UDim2.new(0, 0, 0.0942307711, 0)
+Tabs.Size = UDim2.new(0.188760802, 0, 0.904963017, 0)
+Tabs.CanvasSize = UDim2.new(0, 0, 5, 0)
+Tabs.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
+Tabs.ScrollBarThickness = 10
+Tabs.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
+Tabs.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
 
-    -- Настройка названия
-    self.nameLabel.Name = "Name"
-    self.nameLabel.Parent = self.hub
-    self.nameLabel.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
-    self.nameLabel.Size = UDim2.new(1, 0, 0.0964779332, 0)
-    self.nameLabel.Font = Enum.Font.Unknown
-    self.nameLabel.Text = "RELKIN"
-    self.nameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-    self.nameLabel.TextScaled = true
+UICorner_2.Parent = Tabs
 
-    -- Добавление функции перетаскивания
-    self:makeDraggable(self.hub)
+UIAspectRatioConstraint.Parent = Tabs
+UIAspectRatioConstraint.AspectRatio = 0.278
 
-    return self
+Name.Name = "Name"
+Name.Parent = hub
+Name.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
+Name.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Name.BorderSizePixel = 0
+Name.Position = UDim2.new(-0.00112176291, 0, -0.00186849444, 0)
+Name.Size = UDim2.new(1, 0, 0.0964779332, 0)
+Name.ZIndex = 2
+Name.Font = Enum.Font.Unknown
+Name.Text = "RELKIN"
+Name.TextColor3 = Color3.fromRGB(0, 0, 0)
+Name.TextScaled = true
+Name.TextSize = 48.000
+Name.TextWrapped = true
+Name.TextXAlignment = Enum.TextXAlignment.Left
+
+UICorner_3.Parent = Name
+
+UIAspectRatioConstraint_2.Parent = Name
+UIAspectRatioConstraint_2.AspectRatio = 13.833
+
+UITextSizeConstraint.Parent = Name
+UITextSizeConstraint.MaxTextSize = 50
+
+UIAspectRatioConstraint_3.Parent = hub
+UIAspectRatioConstraint_3.AspectRatio = 1.335
+
+UIAspectRatioConstraint_4.Parent = GUI
+UIAspectRatioConstraint_4.AspectRatio = 1.330
+
+UIAspectRatioConstraint_5.Parent = RELKINlibrary
+UIAspectRatioConstraint_5.AspectRatio = 2.326
+
+-- Scripts:
+
+local function DRGWRU_fake_script()
+	local script = Instance.new('LocalScript', hub)
+
+	local frame = script.Parent
+	local player = game.Players.LocalPlayer
+	local mouse = player:GetMouse()
+	local dragging = false
+	local dragStart = nil
+	local startPos = nil
+	
+	frame.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+	
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	game:GetService("RunService").RenderStepped:Connect(function()
+		if dragging then
+			local deltaX = mouse.X - dragStart.X
+			local deltaY = mouse.Y - dragStart.Y
+			frame.Position = UDim2.new(
+				startPos.X.Scale, startPos.X.Offset + deltaX,
+				startPos.Y.Scale, startPos.Y.Offset + deltaY
+			)
+		end
+	end)
 end
-
--- Функция для перетаскивания
-function RELKINLibrary:makeDraggable(frame)
-    local player = game.Players.LocalPlayer
-    local mouse = player:GetMouse()
-    local dragging = false
-    local dragStart = nil
-    local startPos = nil
-
-    frame.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = true
-            dragStart = input.Position
-            startPos = frame.Position
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
-
-    game:GetService("RunService").RenderStepped:Connect(function()
-        if dragging then
-            local deltaX = mouse.X - dragStart.X
-            local deltaY = mouse.Y - dragStart.Y
-            frame.Position = UDim2.new(
-                startPos.X.Scale, startPos.X.Offset + deltaX,
-                startPos.Y.Scale, startPos.Y.Offset + deltaY
-            )
-        end
-    end)
-end
-
-return RELKINLibrary
+coroutine.wrap(DRGWRU_fake_script)()
