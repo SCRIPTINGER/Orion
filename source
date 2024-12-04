@@ -1,102 +1,122 @@
--- Simple UI Library for Roblox
-local SimpleUILib = {}
-SimpleUILib.__index = SimpleUILib
+-- RELKINLibrary.lua
+local RELKINLibrary = {}
+RELKINLibrary.__index = RELKINLibrary
 
-function SimpleUILib.new(name)
-    local self = setmetatable({}, SimpleUILib)
+-- Создание нового экземпляра библиотеки
+function RELKINLibrary.new(name)
+    local self = setmetatable({}, RELKINLibrary)
 
-    -- Создаем основное окно
+    -- Создаем GUI
     self.ScreenGui = Instance.new("ScreenGui")
     self.Frame = Instance.new("Frame")
-    self.Frame.Size = UDim2.new(0.5, 0, 0.5, 0)
-    self.Frame.Position = UDim2.new(0.25, 0, 0.25, 0)
-    self.Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    self.Frame.Parent = self.ScreenGui
+    self.Hub = Instance.new("Frame")
+    self.UICorner = Instance.new("UICorner")
+    self.UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+    self.Tabs = Instance.new("ScrollingFrame")
+    self.UICorner_2 = Instance.new("UICorner")
+    self.NameLabel = Instance.new("TextLabel")
+    self.UICorner_3 = Instance.new("UICorner")
 
-    self.Title = Instance.new("TextLabel")
-    self.Title.Size = UDim2.new(1, 0, 0.1, 0)
-    self.Title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    self.Title.Text = name
-    self.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-    self.Title.Parent = self.Frame
-
-    self.TabContainer = Instance.new("Frame")
-    self.TabContainer.Size = UDim2.new(1, 0, 0.9, 0)
-    self.TabContainer.Position = UDim2.new(0, 0, 0.1, 0)
-    self.TabContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    self.TabContainer.Parent = self.Frame
-
+    -- Настройки GUI
+    self.ScreenGui.Name = "RELKIN library"
     self.ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    self.ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    self.ScreenGui.ResetOnSpawn = false
+
+    self.Frame.Name = "GUI"
+    self.Frame.Parent = self.ScreenGui
+    self.Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    self.Frame.BackgroundTransparency = 1.000
+    self.Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    self.Frame.BorderSizePixel = 0
+    self.Frame.Position = UDim2.new(0, 625, 0, 162)
+    self.Frame.Size = UDim2.new(0.372, 0, 0.646, 0)
+
+    self.Hub.Name = "hub"
+    self.Hub.Parent = self.Frame
+    self.Hub.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
+    self.Hub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    self.Hub.BorderSizePixel = 0
+    self.Hub.Position = UDim2.new(-0.001, 0, 0, 0)
+    self.Hub.Size = UDim2.new(0, 694, 0, 520)
+    self.Hub.ZIndex = 0
+
+    self.UICorner.Parent = self.Hub
+
+    self.UIAspectRatioConstraint.Parent = self.Hub
+    self.UIAspectRatioConstraint.AspectRatio = 1.339
+
+    self.Tabs.Name = "Tabs"
+    self.Tabs.Parent = self.Hub
+    self.Tabs.Active = true
+    self.Tabs.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    self.Tabs.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    self.Tabs.BorderSizePixel = 0
+    self.Tabs.Position = UDim2.new(-0.001, 0, 0.094, 0)
+    self.Tabs.Size = UDim2.new(0, 131, 0, 469)
+    self.Tabs.CanvasSize = UDim2.new(0, 0, 5, 0)
+    self.Tabs.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
+    self.Tabs.ScrollBarThickness = 10
+    self.Tabs.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
+    self.Tabs.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+
+    self.UICorner_2.Parent = self.Tabs
+
+    self.NameLabel.Name = "Name"
+    self.NameLabel.Parent = self.Hub
+    self.NameLabel.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
+    self.NameLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    self.NameLabel.BorderSizePixel = 0
+    self.NameLabel.Position = UDim2.new(-0.001, 0, -0.001, 0)
+    self.NameLabel.Size = UDim2.new(0, 694, 0, 50)
+    self.NameLabel.ZIndex = 2
+    self.NameLabel.Font = Enum.Font.Unknown
+    self.NameLabel.Text = name or "RELKIN"
+    self.NameLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+    self.NameLabel.TextSize = 48.000
+    self.NameLabel.TextWrapped = true
+    self.NameLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+    self.UICorner_3.Parent = self.NameLabel
+
+    -- Добавляем возможность перетаскивания
+    self:makeDraggable(self.Hub)
 
     return self
 end
 
-function SimpleUILib:AddTab(name)
-    local TabButton = Instance.new("TextButton")
-    TabButton.Size = UDim2.new(0.1, 0, 0.1, 0)
-    TabButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-    TabButton.Text = name
-    TabButton.Parent = self.TabContainer
+-- Функция для перетаскивания GUI
+function RELKINLibrary:makeDraggable(frame)
+    local player = game.Players.LocalPlayer
+    local mouse = player:GetMouse()
+    local dragging = false
+    local dragStart = nil
+    local startPos = nil
 
-    TabButton.MouseButton1Click:Connect(function()
-        print(name .. " tab clicked!")
-        -- Здесь можно добавить логику для отображения контента вкладки
-    end)
-end
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
 
-function SimpleUILib:AddButton(tabName, buttonName, callback)
-    local Button = Instance.new("TextButton")
-    Button.Size = UDim2.new(0.8, 0, 0.1, 0)
-    Button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    Button.Text = buttonName
-    Button.Parent = self.TabContainer
-
-    Button.MouseButton1Click:Connect(function()
-        callback()
-    end)
-end
-
-function SimpleUILib:AddTextbox(tabName, textboxName, callback)
-    local TextBox = Instance.new("TextBox")
-    TextBox.Size = UDim2.new(0.8, 0, 0.1, 0)
-    TextBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    TextBox.PlaceholderText = textboxName
-    TextBox.Parent = self.TabContainer
-
-    TextBox.FocusLost:Connect(function(enterPressed)
-        if enterPressed then
-            callback(TextBox.Text)
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
         end
     end)
-local frame = script.Parent -- Ссылка на родительский Frame
-local player = game.Players.LocalPlayer
-local mouse = player:GetMouse()
-local dragging = false
-local dragStart = nil
-local startPos = nil
 
--- Функция для начала перетаскивания
-frame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = frame.Position
-
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
-end)
-
--- Функция для перемещения
-game:GetService("RunService").RenderStepped:Connect(function()
-    if dragging then
-        local delta = mouse.X - dragStart.X
-        frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta, startPos.Y.Scale, startPos.Y.Offset)
-    end
-end)
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if dragging then
+            local deltaX = mouse.X - dragStart.X
+            local deltaY = mouse.Y - dragStart.Y
+            frame.Position = UDim2.new(
+                startPos.X.Scale, startPos.X.Offset + deltaX,
+                startPos.Y.Scale, startPos.Y.Offset + deltaY
+            )
+        end
+    end)
 end
 
-return SimpleUILib
+return RELKINLibrary
