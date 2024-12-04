@@ -1,47 +1,73 @@
-local MobilePCMover = require(game.ServerScriptService.MobilePCMover)
+-- Simple UI Library for Roblox
+local SimpleUILib = {}
+SimpleUILib.__index = SimpleUILib
 
-local myObject = script.Parent -- замените на ваш объект
-local mover = MobilePCMover.new(myObject)
-local MobilePCMover = {}
-MobilePCMover.__index = MobilePCMover
+function SimpleUILib.new(name)
+    local self = setmetatable({}, SimpleUILib)
 
-function MobilePCMover.new(object)
-    local self = setmetatable({}, MobilePCMover)
-    self.object = object
-    self.isMoving = false
+    -- Создаем основное окно
+    self.ScreenGui = Instance.new("ScreenGui")
+    self.Frame = Instance.new("Frame")
+    self.Frame.Size = UDim2.new(0.5, 0, 0.5, 0)
+    self.Frame.Position = UDim2.new(0.25, 0, 0.25, 0)
+    self.Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    self.Frame.Parent = self.ScreenGui
 
-    -- Обработчики событий
-    self:setupInputHandlers()
+    self.Title = Instance.new("TextLabel")
+    self.Title.Size = UDim2.new(1, 0, 0.1, 0)
+    self.Title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    self.Title.Text = name
+    self.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    self.Title.Parent = self.Frame
+
+    self.TabContainer = Instance.new("Frame")
+    self.TabContainer.Size = UDim2.new(1, 0, 0.9, 0)
+    self.TabContainer.Position = UDim2.new(0, 0, 0.1, 0)
+    self.TabContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    self.TabContainer.Parent = self.Frame
+
+    self.ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
     return self
 end
 
-function MobilePCMover:setupInputHandlers()
-    -- Для ПК
-    self.object.MouseButton1Down:Connect(function()
-        self.isMoving = true
-    end)
+function SimpleUILib:AddTab(name)
+    local TabButton = Instance.new("TextButton")
+    TabButton.Size = UDim2.new(0.1, 0, 0.1, 0)
+    TabButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    TabButton.Text = name
+    TabButton.Parent = self.TabContainer
 
-    self.object.MouseButton1Up:Connect(function()
-        self.isMoving = false
+    TabButton.MouseButton1Click:Connect(function()
+        print(name .. " tab clicked!")
+        -- Здесь можно добавить логику для отображения контента вкладки
     end)
+end
 
-    game:GetService("UserInputService").InputChanged:Connect(function(input)
-        if self.isMoving and input.UserInputType == Enum.UserInputType.MouseMovement then
-            self.object.Position = UDim2.new(0, input.Position.X, 0, input.Position.Y)
-        end
+function SimpleUILib:AddButton(tabName, buttonName, callback)
+    local Button = Instance.new("TextButton")
+    Button.Size = UDim2.new(0.8, 0, 0.1, 0)
+    Button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    Button.Text = buttonName
+    Button.Parent = self.TabContainer
+
+    Button.MouseButton1Click:Connect(function()
+        callback()
     end)
+end
 
-    -- Для мобильных устройств
-    self.object.TouchTap:Connect(function(touch)
-        self.isMoving = true
-        self.object.Position = UDim2.new(0, touch.Position.X, 0, touch.Position.Y)
-    end)
+function SimpleUILib:AddTextbox(tabName, textboxName, callback)
+    local TextBox = Instance.new("TextBox")
+    TextBox.Size = UDim2.new(0.8, 0, 0.1, 0)
+    TextBox.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    TextBox.PlaceholderText = textboxName
+    TextBox.Parent = self.TabContainer
 
-    game:GetService("UserInputService").TouchChanged:Connect(function(touch, change)
-        if self.isMoving and touch.UserInputType == Enum.UserInputType.Touch then
-            self.object.Position = UDim2.new(0, change.Position.X, 0, change.Position.Y)
+    TextBox.FocusLost:Connect(function(enterPressed)
+        if enterPressed then
+            callback(TextBox.Text)
         end
     end)
 end
 
-return MobilePCMover
+return SimpleUILib
