@@ -1,117 +1,141 @@
--- RELKINLibrary.lua (Module Script)
+-- Gui to Lua
+-- Version: 3.2
 
 local RELKINLibrary = {}
-RELKINLibrary.__index = RELKINLibrary
 
-local function createInstance(instanceType, properties, parent)
-local instance = Instance.new(instanceType)
-for prop, value in pairs(properties) do
-instance[prop] = value
+function RELKINLibrary.new(name)
+    -- Instances:
+
+    local RELKINlibrary = Instance.new("ScreenGui")
+    local Main = Instance.new("Frame")
+    local UICorner = Instance.new("UICorner")
+    local Navgations = Instance.new("ScrollingFrame")
+    local UICorner_2 = Instance.new("UICorner")
+    local TopBar = Instance.new("Frame")
+    local UICorner_3 = Instance.new("UICorner")
+    local Close = Instance.new("ImageButton")
+    local UICorner_4 = Instance.new("UICorner")
+    local Title = Instance.new("TextLabel")
+    local UICorner_5 = Instance.new("UICorner")
+    local PlaceHolder = Instance.new("Frame")
+    local UICorner_6 = Instance.new("UICorner")
+    local Controls = Instance.new("Frame")
+    local UICorner_7 = Instance.new("UICorner")
+
+    -- Setup ScreenGui
+    RELKINlibrary.Name = name or "RELKIN Library"
+    RELKINlibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    RELKINlibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+    -- Setup Main Frame
+    Main.Name = "Main"
+    Main.Parent = RELKINlibrary
+    Main.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
+    Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Main.Position = UDim2.new(0.373575211, 0, 0.302615196, 0)
+    Main.Size = UDim2.new(0, 600, 0, 500)
+
+    UICorner.Parent = Main
+
+    -- Setup Navgations
+    Navgations.Name = "Navgations"
+    Navgations.Parent = Main
+    Navgations.Active = true
+    Navgations.BackgroundColor3 = Color3.fromRGB(95, 95, 95)
+    Navgations.Position = UDim2.new(0.00387827563, 0, 0.098741211, 0)
+    Navgations.Size = UDim2.new(0, 100, 0, 450)
+    Navgations.CanvasSize = UDim2.new(0, 0, 5, 0)
+    Navgations.ScrollBarThickness = 10
+
+    UICorner_2.Parent = Navgations
+
+    -- Setup TopBar
+    TopBar.Name = "TopBar"
+    TopBar.Parent = Main
+    TopBar.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
+    TopBar.Size = UDim2.new(0, 600, 0, 49)
+
+    UICorner_3.Parent = TopBar
+
+    -- Setup Close Button
+    Close.Name = "Close"
+    Close.Parent = TopBar
+    Close.BackgroundTransparency = 1.000
+    Close.Position = UDim2.new(0.935793936, 0, 0.100000001, 0)
+    Close.Size = UDim2.new(0, 40, 0, 40)
+    Close.Image = "rbxassetid://10734895698"
+
+    UICorner_4.Parent = Close
+
+    -- Setup Title
+    Title.Name = "Title"
+    Title.Parent = TopBar
+    Title.BackgroundTransparency = 1.000
+    Title.Position = UDim2.new(0.172209784, 0, -0.0222765859, 0)
+    Title.Size = UDim2.new(0, 365, 0, 50)
+    Title.Font = Enum.Font.Unknown
+    Title.Text = name or "RELKIN"
+    Title.TextColor3 = Color3.fromRGB(0, 0, 0)
+    Title.TextSize = 53.000
+    Title.TextWrapped = true
+
+    UICorner_5.Parent = Title
+
+    -- Setup PlaceHolder
+    PlaceHolder.Name = "Place Holder"
+    PlaceHolder.Parent = Main
+    PlaceHolder.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+    PlaceHolder.Position = UDim2.new(0, 0, 0.0967412144, 0)
+    PlaceHolder.Size = UDim2.new(0, 600, 0, 450)
+
+    UICorner_6.Parent = PlaceHolder
+
+    -- Setup Controls Frame
+    Controls.Name = "Controls"
+    Controls.Parent = Main
+    Controls.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    Controls.Position = UDim2.new(0.172209874, 0, 0.0967412144, 0)
+    Controls.Size = UDim2.new(0, 496, 0, 450)
+
+    UICorner_7.Parent = Controls
+
+    -- Dragging functionality
+    local function dragFrame(frame)
+        local player = game.Players.LocalPlayer
+        local mouse = player:GetMouse()
+        local dragging = false
+        local dragStart = nil
+        local startPos = nil
+
+        frame.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging = true
+                dragStart = input.Position
+                startPos = frame.Position
+
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end)
+
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if dragging then
+                local deltaX = mouse.X - dragStart.X
+                local deltaY = mouse.Y - dragStart.Y
+                frame.Position = UDim2.new(
+                    startPos.X.Scale, startPos.X.Offset + deltaX,
+                    startPos.Y.Scale, startPos.Y.Offset + deltaY
+                )
+            end
+        end)
+    end
+
+    dragFrame(Main)
+
+    return RELKINlibrary
 end
-instance.Parent = parent
-return instance
-end
 
-function RELKINLibrary:Create()
-local library = createInstance("ScreenGui", {
-Name = "RELKIN library",
-ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-ResetOnSpawn = false
-}, game.Players.LocalPlayer:WaitForChild("PlayerGui"))
-
-复制代码
-local GUI = createInstance("Frame", {
-Name = "GUI",
-BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-BackgroundTransparency = 1,
-BorderColor3 = Color3.fromRGB(0, 0, 0),
-Position = UDim2.new(0.334582448, 0, 0.259028643, 0),
-Size = UDim2.new(0.370985001, 0, 0.833599985, 0)
-}, library)
-
-local hub = createInstance("Frame", {
-Name = "hub",
-BackgroundColor3 = Color3.fromRGB(67, 67, 67),
-Size = UDim2.new(1.00144303, 0, 0.998080611, 0)
-}, GUI)
-
-createInstance("UICorner", {}, hub)
-
-local Tabs = createInstance("ScrollingFrame", {
-Name = "Tabs",
-Active = true,
-BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-Position = UDim2.new(0, 0, 0.0942307711, 0),
-Size = UDim2.new(0.188760802, 0, 0.904963017, 0),
-CanvasSize = UDim2.new(0, 0, 5, 0),
-HorizontalScrollBarInset = Enum.ScrollBarInset.Always,
-ScrollBarThickness = 10,
-VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar,
-VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
-}, hub)
-
-createInstance("UICorner", {}, Tabs)
-createInstance("UIAspectRatioConstraint", { AspectRatio = 0.278 }, Tabs)
-
-local Name = createInstance("TextLabel", {
-Name = "Name",
-BackgroundColor3 = Color3.fromRGB(94, 94, 94),
-Position = UDim2.new(-0.00112176291, 0, -0.00186849444, 0),
-Size = UDim2.new(1, 0, 0.0964779332, 0),
-ZIndex = 2,
-Font = Enum.Font.Unknown,
-Text = "RELKIN",
-TextColor3 = Color3.fromRGB(0, 0, 0),
-TextScaled = true,
-TextSize = 48,
-TextWrapped = true,
-TextXAlignment = Enum.TextXAlignment.Left
-}, hub)
-
-createInstance("UICorner", {}, Name)
-createInstance("UIAspectRatioConstraint", { AspectRatio = 13.833 }, Name)
-createInstance("UITextSizeConstraint", { MaxTextSize = 50 }, Name)
-
-createInstance("UIAspectRatioConstraint", { AspectRatio = 1.335 }, hub)
-createInstance("UIAspectRatioConstraint", { AspectRatio = 1.330 }, GUI)
-createInstance("UIAspectRatioConstraint", { AspectRatio = 2.326 }, library)
-
-self:SetupDragging(hub) -- Setup dragging for the 'hub' frame
-
-return library
-end
-
-function RELKINLibrary:SetupDragging(frame)
-local player = game.Players.LocalPlayer
-local mouse = player:GetMouse()
-local dragging, dragStart, startPos = false, nil, nil
-
-复制代码
-frame.InputBegan:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseButton1 then
-dragging = true
-dragStart = input.Position
-startPos = frame.Position
-
-复制代码
-    input.Changed:Connect(function()
-        if input.UserInputState == Enum.UserInputState.End then
-            dragging = false
-        end
-    end)
-end
-end)
-
-game:GetService("RunService").RenderStepped:Connect(function()
-if dragging then
-local deltaX = mouse.X - dragStart.X
-local deltaY = mouse.Y - dragStart.Y
-frame.Position = UDim2.new(
-startPos.X.Scale, startPos.X.Offset + deltaX,
-startPos.Y.Scale, startPos.Y.Offset + deltaY
-)
-end
-end)
-end
-
--- Return the library mo
+return RELKINLibrary
