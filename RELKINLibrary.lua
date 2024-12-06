@@ -58,18 +58,21 @@ local UICorner_13 = Instance.new("UICorner")
 local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
-local CLOSEOPEN = Instance.new("TextButton")
+local MainShadow = Instance.new("ImageLabel")
+local UIAspectRatioConstraint_18 = Instance.new("UIAspectRatioConstraint")
+local mobile = Instance.new("Frame")
 local BUTTON = Instance.new("ImageButton")
 local UICorner_14 = Instance.new("UICorner")
-local UIAspectRatioConstraint_18 = Instance.new("UIAspectRatioConstraint")
-local UITextSizeConstraint_8 = Instance.new("UITextSizeConstraint")
 local UIAspectRatioConstraint_19 = Instance.new("UIAspectRatioConstraint")
+local BUTTONShadow = Instance.new("ImageLabel")
+local mobileShadow = Instance.new("ImageLabel")
+local UIAspectRatioConstraint_20 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_21 = Instance.new("UIAspectRatioConstraint")
 
 --Properties:
 
 RELKINlibrary.Name = "RELKIN library"
 RELKINlibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-RELKINlibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 RELKINlibrary.ResetOnSpawn = false
 
 Main.Name = "Main"
@@ -105,6 +108,7 @@ Navgations.BorderSizePixel = 0
 Navgations.Position = UDim2.new(-0.00106125372, 0, -0.00223766663, 0)
 Navgations.Size = UDim2.new(0.258252025, 0, 1.00223756, 0)
 Navgations.ZIndex = 2
+Navgations.CanvasPosition = Vector2.new(0, 150)
 Navgations.CanvasSize = UDim2.new(0, 0, 5, 0)
 Navgations.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
 Navgations.ScrollBarThickness = 1
@@ -302,10 +306,11 @@ UIAspectRatioConstraint_12.AspectRatio = 0.989
 Powered.Name = "Powered"
 Powered.Parent = Controls2
 Powered.BackgroundColor3 = Color3.fromRGB(145, 145, 145)
+Powered.BackgroundTransparency = 1.000
 Powered.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Powered.BorderSizePixel = 0
-Powered.Position = UDim2.new(0.997752607, 0, 0.99780941, 0)
-Powered.Size = UDim2.new(0.0199999996, 0, -0.879999995, 0)
+Powered.Position = UDim2.new(-0.00922007579, 0, 0.171991676, 0)
+Powered.Size = UDim2.new(1.00572681, 0, 0.839700222, 9)
 Powered.Font = Enum.Font.Unknown
 Powered.Text = "Powered by SKWERKIN"
 Powered.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -377,42 +382,75 @@ UIAspectRatioConstraint_16.AspectRatio = 7.300
 UIAspectRatioConstraint_17.Parent = TopBar
 UIAspectRatioConstraint_17.AspectRatio = 12.245
 
-CLOSEOPEN.Name = "CLOSE/OPEN"
-CLOSEOPEN.Parent = RELKINlibrary
-CLOSEOPEN.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-CLOSEOPEN.BorderColor3 = Color3.fromRGB(0, 0, 0)
-CLOSEOPEN.BorderSizePixel = 0
-CLOSEOPEN.Position = UDim2.new(0, 0, 0.398400009, 0)
-CLOSEOPEN.Size = UDim2.new(0.0407497957, 0, 0.0771604925, 0)
-CLOSEOPEN.Font = Enum.Font.SourceSans
-CLOSEOPEN.Text = ""
-CLOSEOPEN.TextColor3 = Color3.fromRGB(0, 0, 0)
-CLOSEOPEN.TextScaled = true
-CLOSEOPEN.TextSize = 14.000
-CLOSEOPEN.TextWrapped = true
+MainShadow.Name = "MainShadow"
+MainShadow.Parent = Main
+MainShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+MainShadow.BackgroundTransparency = 1.000
+MainShadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+MainShadow.Size = UDim2.new(1.50180852, 0, 1.60217035, 0)
+MainShadow.ZIndex = -1
+MainShadow.Image = "rbxassetid://12817494724"
+MainShadow.ImageTransparency = 0.500
+MainShadow.ScaleType = Enum.ScaleType.Slice
+MainShadow.SliceCenter = Rect.new(85, 85, 427, 427)
+
+UIAspectRatioConstraint_18.Parent = MainShadow
+UIAspectRatioConstraint_18.AspectRatio = 1.125
+
+mobile.Name = "mobile"
+mobile.Parent = RELKINlibrary
+mobile.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+mobile.BorderColor3 = Color3.fromRGB(0, 0, 0)
+mobile.BorderSizePixel = 0
+mobile.Position = UDim2.new(0, 0, 0.398399949, 0)
+mobile.Size = UDim2.new(0.0908059031, 0, 0.123456791, 0)
 
 BUTTON.Name = "BUTTON"
-BUTTON.Parent = CLOSEOPEN
+BUTTON.Parent = mobile
 BUTTON.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+BUTTON.BackgroundTransparency = 1.000
 BUTTON.BorderColor3 = Color3.fromRGB(0, 0, 0)
 BUTTON.BorderSizePixel = 0
 BUTTON.Position = UDim2.new(0, 0, -0.00159973139, 0)
 BUTTON.Size = UDim2.new(1, 0, 1, 0)
-BUTTON.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+BUTTON.Image = "rbxassetid://10734898355"
 
 UICorner_14.CornerRadius = UDim.new(9999, 9)
 UICorner_14.Parent = BUTTON
 
-UIAspectRatioConstraint_18.Parent = BUTTON
+UIAspectRatioConstraint_19.Parent = BUTTON
 
-UITextSizeConstraint_8.Parent = CLOSEOPEN
-UITextSizeConstraint_8.MaxTextSize = 50
+BUTTONShadow.Name = "BUTTONShadow"
+BUTTONShadow.Parent = BUTTON
+BUTTONShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+BUTTONShadow.BackgroundTransparency = 1.000
+BUTTONShadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+BUTTONShadow.Size = UDim2.new(1, 137, 1, 137)
+BUTTONShadow.ZIndex = 0
+BUTTONShadow.Image = "rbxassetid://12817518992"
+BUTTONShadow.ImageTransparency = 0.500
+BUTTONShadow.ScaleType = Enum.ScaleType.Slice
+BUTTONShadow.SliceCenter = Rect.new(85, 85, 427, 427)
 
-UIAspectRatioConstraint_19.Parent = CLOSEOPEN
+mobileShadow.Name = "mobileShadow"
+mobileShadow.Parent = mobile
+mobileShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+mobileShadow.BackgroundTransparency = 1.000
+mobileShadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+mobileShadow.Size = UDim2.new(2.9000001, 0, 2.9000001, 0)
+mobileShadow.ZIndex = 0
+mobileShadow.Image = "rbxassetid://12817467194"
+mobileShadow.ImageTransparency = 0.500
+mobileShadow.ScaleType = Enum.ScaleType.Slice
+mobileShadow.SliceCenter = Rect.new(85, 85, 427, 427)
+
+UIAspectRatioConstraint_20.Parent = mobileShadow
+
+UIAspectRatioConstraint_21.Parent = mobile
 
 -- Scripts:
 
-local function IXND_fake_script() -- Main.dragging script 
+local function EQBHXZQ_fake_script() -- Main.dragging script 
 	local script = Instance.new('LocalScript', Main)
 
 	local frame = script.Parent -- Ссылка на родительский Frame
@@ -450,56 +488,56 @@ local function IXND_fake_script() -- Main.dragging script
 		end
 	end)
 end
-coroutine.wrap(IXND_fake_script)()
-local function KFOG_fake_script() -- Tab1.Invisible 
+coroutine.wrap(EQBHXZQ_fake_script)()
+local function LYDJU_fake_script() -- Tab1.Invisible 
 	local script = Instance.new('LocalScript', Tab1)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls1.Visible = false
 	end)
 end
-coroutine.wrap(KFOG_fake_script)()
-local function GTYYXN_fake_script() -- Tab1.Visible 
+coroutine.wrap(LYDJU_fake_script)()
+local function GGNLC_fake_script() -- Tab1.Visible 
 	local script = Instance.new('LocalScript', Tab1)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls2.Visible = true
 	end)
 end
-coroutine.wrap(GTYYXN_fake_script)()
-local function JLCM_fake_script() -- Tab2.Invisible 
+coroutine.wrap(GGNLC_fake_script)()
+local function IUQYBXR_fake_script() -- Tab2.Invisible 
 	local script = Instance.new('LocalScript', Tab2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls1.Visible = true
 	end)
 end
-coroutine.wrap(JLCM_fake_script)()
-local function JALEP_fake_script() -- Tab2.Visible 
+coroutine.wrap(IUQYBXR_fake_script)()
+local function WONILCK_fake_script() -- Tab2.Visible 
 	local script = Instance.new('LocalScript', Tab2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls2.Visible = false
 	end)
 end
-coroutine.wrap(JALEP_fake_script)()
-local function BFFN_fake_script() -- Button.Click 
+coroutine.wrap(WONILCK_fake_script)()
+local function FSBLUQ_fake_script() -- Button.Click 
 	local script = Instance.new('LocalScript', Button)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		print("Button Clicked")
 	end)
 end
-coroutine.wrap(BFFN_fake_script)()
-local function HTXWPF_fake_script() -- Button_2.Click 
+coroutine.wrap(FSBLUQ_fake_script)()
+local function QSTDPC_fake_script() -- Button_2.Click 
 	local script = Instance.new('LocalScript', Button_2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		print("Button Clicked")
 	end)
 end
-coroutine.wrap(HTXWPF_fake_script)()
-local function HUYWQCG_fake_script() -- Close.Close script 
+coroutine.wrap(QSTDPC_fake_script)()
+local function QUPQ_fake_script() -- Close.Close script 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -507,8 +545,8 @@ local function HUYWQCG_fake_script() -- Close.Close script
 		script.Parent.Parent.Parent.Parent:Destroy()
 	end)
 end
-coroutine.wrap(HUYWQCG_fake_script)()
-local function VQVO_fake_script() -- BUTTON.LocalScript 
+coroutine.wrap(QUPQ_fake_script)()
+local function GQWJ_fake_script() -- BUTTON.LocalScript 
 	local script = Instance.new('LocalScript', BUTTON)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -519,4 +557,4 @@ local function VQVO_fake_script() -- BUTTON.LocalScript
 		end
 	end)
 end
-coroutine.wrap(VQVO_fake_script)()
+coroutine.wrap(GQWJ_fake_script)()
