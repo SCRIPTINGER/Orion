@@ -1,8 +1,3 @@
--- Gui to Lua
--- Version: 3.2
-
--- Instances:
-
 local RELKINlibrary = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
@@ -108,7 +103,6 @@ Navgations.BorderSizePixel = 0
 Navgations.Position = UDim2.new(-0.00106125372, 0, -0.00223766663, 0)
 Navgations.Size = UDim2.new(0.258252025, 0, 1.00223756, 0)
 Navgations.ZIndex = 2
-Navgations.CanvasPosition = Vector2.new(0, 150)
 Navgations.CanvasSize = UDim2.new(0, 0, 5, 0)
 Navgations.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
 Navgations.ScrollBarThickness = 1
@@ -450,7 +444,7 @@ UIAspectRatioConstraint_21.Parent = mobile
 
 -- Scripts:
 
-local function EQBHXZQ_fake_script() -- Main.dragging script 
+local function NFMZ_fake_script() -- Main.dragging script 
 	local script = Instance.new('LocalScript', Main)
 
 	local frame = script.Parent -- Ссылка на родительский Frame
@@ -488,56 +482,56 @@ local function EQBHXZQ_fake_script() -- Main.dragging script
 		end
 	end)
 end
-coroutine.wrap(EQBHXZQ_fake_script)()
-local function LYDJU_fake_script() -- Tab1.Invisible 
+coroutine.wrap(NFMZ_fake_script)()
+local function OMOBA_fake_script() -- Tab1.Invisible 
 	local script = Instance.new('LocalScript', Tab1)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls1.Visible = false
 	end)
 end
-coroutine.wrap(LYDJU_fake_script)()
-local function GGNLC_fake_script() -- Tab1.Visible 
+coroutine.wrap(OMOBA_fake_script)()
+local function HALPPGT_fake_script() -- Tab1.Visible 
 	local script = Instance.new('LocalScript', Tab1)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls2.Visible = true
 	end)
 end
-coroutine.wrap(GGNLC_fake_script)()
-local function IUQYBXR_fake_script() -- Tab2.Invisible 
+coroutine.wrap(HALPPGT_fake_script)()
+local function ZOZRS_fake_script() -- Tab2.Invisible 
 	local script = Instance.new('LocalScript', Tab2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls1.Visible = true
 	end)
 end
-coroutine.wrap(IUQYBXR_fake_script)()
-local function WONILCK_fake_script() -- Tab2.Visible 
+coroutine.wrap(ZOZRS_fake_script)()
+local function QLTUY_fake_script() -- Tab2.Visible 
 	local script = Instance.new('LocalScript', Tab2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls2.Visible = false
 	end)
 end
-coroutine.wrap(WONILCK_fake_script)()
-local function FSBLUQ_fake_script() -- Button.Click 
+coroutine.wrap(QLTUY_fake_script)()
+local function EIJVTKA_fake_script() -- Button.Click 
 	local script = Instance.new('LocalScript', Button)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		print("Button Clicked")
 	end)
 end
-coroutine.wrap(FSBLUQ_fake_script)()
-local function QSTDPC_fake_script() -- Button_2.Click 
+coroutine.wrap(EIJVTKA_fake_script)()
+local function JZMI_fake_script() -- Button_2.Click 
 	local script = Instance.new('LocalScript', Button_2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		print("Button Clicked")
 	end)
 end
-coroutine.wrap(QSTDPC_fake_script)()
-local function QUPQ_fake_script() -- Close.Close script 
+coroutine.wrap(JZMI_fake_script)()
+local function WRRC_fake_script() -- Close.Close script 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -545,8 +539,8 @@ local function QUPQ_fake_script() -- Close.Close script
 		script.Parent.Parent.Parent.Parent:Destroy()
 	end)
 end
-coroutine.wrap(QUPQ_fake_script)()
-local function GQWJ_fake_script() -- BUTTON.LocalScript 
+coroutine.wrap(WRRC_fake_script)()
+local function OQYSFY_fake_script() -- BUTTON.LocalScript 
 	local script = Instance.new('LocalScript', BUTTON)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -557,4 +551,4 @@ local function GQWJ_fake_script() -- BUTTON.LocalScript
 		end
 	end)
 end
-coroutine.wrap(GQWJ_fake_script)()
+coroutine.wrap(OQYSFY_fake_script)()
