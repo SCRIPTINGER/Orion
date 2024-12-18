@@ -4,13 +4,6 @@ local RELKINLibrary = {}
 -- Создание основного интерфейса
 local MakeDraggable = loadstring(game:HttpGet('https://raw.githubusercontent.com/SCRIPTINGER/SKWER-library/refs/heads/main/SD'))()
 
--- Предположим, у вас есть меню с `Main` и `TopBar`:
-local Main = script.Parent:WaitForChild("Main") -- Основной фрейм
-local TopBar = Main:WaitForChild("TopBar") -- Верхняя панель для перетаскивания
-
--- Активируем перетаскивание
-MakeDraggable(Main, TopBar)
-
 function RELKINLibrary.CreateLibrary(playerGui)
     local RELKINlibrary = Instance.new("ScreenGui")
     RELKINlibrary.Name = "RELKIN Library"
