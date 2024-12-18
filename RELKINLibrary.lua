@@ -1,3 +1,116 @@
+
+local Lib = {}
+
+local tweenService = game:GetService("TweenService")
+local UIS = game:GetService("UserInputService")
+
+function Lib:Drag(frame,parent)
+	local UIS = game:GetService('UserInputService')
+	parent = parent or frame
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(parent, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = parent.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end
+
+function Lib.Window(Title)
+	Title = Title or "Ui Library"
+
+local RELKINlibrary = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local PlaceHolder = Instance.new("Frame")
+local UICorner_2 = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+local Navgations = Instance.new("ScrollingFrame")
+local UICorner_3 = Instance.new("UICorner")
+local Tab1 = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+local Tab2 = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
+local Controls1 = Instance.new("Frame")
+local UICorner_6 = Instance.new("UICorner")
+local Button = Instance.new("TextButton")
+local UICorner_7 = Instance.new("UICorner")
+local Click = Instance.new("ImageLabel")
+local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
+local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
+local Slider = Instance.new("ScrollingFrame")
+local TextLabel = Instance.new("TextLabel")
+local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
+local Controls2 = Instance.new("Frame")
+local UICorner_8 = Instance.new("UICorner")
+local Button_2 = Instance.new("TextButton")
+local UICorner_9 = Instance.new("UICorner")
+local Click_2 = Instance.new("ImageLabel")
+local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
+local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
+local Powered = Instance.new("TextLabel")
+local UICorner_10 = Instance.new("UICorner")
+local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_13 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
+local TopBar = Instance.new("Frame")
+local UICorner_11 = Instance.new("UICorner")
+local Close = Instance.new("ImageButton")
+local UICorner_12 = Instance.new("UICorner")
+local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
+local Name = Instance.new("TextLabel")
+local UICorner_13 = Instance.new("UICorner")
+local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
+local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
+local MainShadow = Instance.new("ImageLabel")
+local UIAspectRatioConstraint_18 = Instance.new("UIAspectRatioConstraint")
+local mobile = Instance.new("Frame")
+local BUTTON = Instance.new("ImageButton")
+local UICorner_14 = Instance.new("UICorner")
+local UIAspectRatioConstraint_19 = Instance.new("UIAspectRatioConstraint")
+local BUTTONShadow = Instance.new("ImageLabel")
+local mobileShadow = Instance.new("ImageLabel")
+local UIAspectRatioConstraint_20 = Instance.new("UIAspectRatioConstraint")
+local UIAspectRatioConstraint_21 = Instance.new("UIAspectRatioConstraint")
+
+	--Properties:
 local RELKINlibrary = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
@@ -117,8 +230,8 @@ Tab1.BackgroundColor3 = Color3.fromRGB(108, 108, 108)
 Tab1.BackgroundTransparency = 1.000
 Tab1.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Tab1.BorderSizePixel = 0
-Tab1.Position = UDim2.new(0.00676278118, 0, -0.00111110008, 0)
-Tab1.Size = UDim2.new(0, 150, 0, 30)
+Tab1.Position = UDim2.new(0.0171347726, 0, -0.00111110881, 0)
+Tab1.Size = UDim2.new(0, 95, 0, 30)
 Tab1.ZIndex = 2
 Tab1.Font = Enum.Font.Unknown
 Tab1.Text = "Home"
@@ -134,7 +247,7 @@ UITextSizeConstraint.Parent = Tab1
 UITextSizeConstraint.MaxTextSize = 30
 
 UIAspectRatioConstraint_2.Parent = Tab1
-UIAspectRatioConstraint_2.AspectRatio = 5.000
+UIAspectRatioConstraint_2.AspectRatio = 3.167
 
 Tab2.Name = "Tab 2"
 Tab2.Parent = Navgations
@@ -142,8 +255,8 @@ Tab2.BackgroundColor3 = Color3.fromRGB(108, 108, 108)
 Tab2.BackgroundTransparency = 1.000
 Tab2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Tab2.BorderSizePixel = 0
-Tab2.Position = UDim2.new(0.00666625984, 0, 0.0655555576, 0)
-Tab2.Size = UDim2.new(0, 150, 0, 30)
+Tab2.Position = UDim2.new(0.00666601956, 0, 0.100128509, 0)
+Tab2.Size = UDim2.new(0, 95, 0, 30)
 Tab2.ZIndex = 2
 Tab2.Font = Enum.Font.Unknown
 Tab2.Text = "Home"
@@ -159,7 +272,7 @@ UITextSizeConstraint_2.Parent = Tab2
 UITextSizeConstraint_2.MaxTextSize = 30
 
 UIAspectRatioConstraint_3.Parent = Tab2
-UIAspectRatioConstraint_3.AspectRatio = 5.000
+UIAspectRatioConstraint_3.AspectRatio = 3.167
 
 UIAspectRatioConstraint_4.Parent = Navgations
 UIAspectRatioConstraint_4.AspectRatio = 0.333
@@ -380,8 +493,8 @@ MainShadow.Name = "MainShadow"
 MainShadow.Parent = Main
 MainShadow.AnchorPoint = Vector2.new(0.5, 0.5)
 MainShadow.BackgroundTransparency = 1.000
-MainShadow.Position = UDim2.new(0.5, 0, 0.5, 2)
-MainShadow.Size = UDim2.new(1.50180852, 0, 1.60217035, 0)
+MainShadow.Position = UDim2.new(0.48960489, 0, 0.490644395, 2)
+MainShadow.Size = UDim2.new(1.4810183, 0, 1.58345902, 0)
 MainShadow.ZIndex = -1
 MainShadow.Image = "rbxassetid://12817494724"
 MainShadow.ImageTransparency = 0.500
@@ -444,7 +557,7 @@ UIAspectRatioConstraint_21.Parent = mobile
 
 -- Scripts:
 
-local function NFMZ_fake_script() -- Main.dragging script 
+local function YZDO_fake_script() -- Main.pc supporting 
 	local script = Instance.new('LocalScript', Main)
 
 	local frame = script.Parent -- Ссылка на родительский Frame
@@ -482,56 +595,56 @@ local function NFMZ_fake_script() -- Main.dragging script
 		end
 	end)
 end
-coroutine.wrap(NFMZ_fake_script)()
-local function OMOBA_fake_script() -- Tab1.Invisible 
+coroutine.wrap(YZDO_fake_script)()
+local function ABSM_fake_script() -- Tab1.Invisible 
 	local script = Instance.new('LocalScript', Tab1)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls1.Visible = false
 	end)
 end
-coroutine.wrap(OMOBA_fake_script)()
-local function HALPPGT_fake_script() -- Tab1.Visible 
+coroutine.wrap(ABSM_fake_script)()
+local function JWKYFOK_fake_script() -- Tab1.Visible 
 	local script = Instance.new('LocalScript', Tab1)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls2.Visible = true
 	end)
 end
-coroutine.wrap(HALPPGT_fake_script)()
-local function ZOZRS_fake_script() -- Tab2.Invisible 
+coroutine.wrap(JWKYFOK_fake_script)()
+local function TKVS_fake_script() -- Tab2.Invisible 
 	local script = Instance.new('LocalScript', Tab2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls1.Visible = true
 	end)
 end
-coroutine.wrap(ZOZRS_fake_script)()
-local function QLTUY_fake_script() -- Tab2.Visible 
+coroutine.wrap(TKVS_fake_script)()
+local function WLHNLO_fake_script() -- Tab2.Visible 
 	local script = Instance.new('LocalScript', Tab2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Parent.Controls2.Visible = false
 	end)
 end
-coroutine.wrap(QLTUY_fake_script)()
-local function EIJVTKA_fake_script() -- Button.Click 
+coroutine.wrap(WLHNLO_fake_script)()
+local function AIWZ_fake_script() -- Button.Click 
 	local script = Instance.new('LocalScript', Button)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		print("Button Clicked")
 	end)
 end
-coroutine.wrap(EIJVTKA_fake_script)()
-local function JZMI_fake_script() -- Button_2.Click 
+coroutine.wrap(AIWZ_fake_script)()
+local function DNGHONK_fake_script() -- Button_2.Click 
 	local script = Instance.new('LocalScript', Button_2)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		print("Button Clicked")
 	end)
 end
-coroutine.wrap(JZMI_fake_script)()
-local function WRRC_fake_script() -- Close.Close script 
+coroutine.wrap(DNGHONK_fake_script)()
+local function AMMQF_fake_script() -- Close.Close script 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -539,8 +652,8 @@ local function WRRC_fake_script() -- Close.Close script
 		script.Parent.Parent.Parent.Parent:Destroy()
 	end)
 end
-coroutine.wrap(WRRC_fake_script)()
-local function OQYSFY_fake_script() -- BUTTON.LocalScript 
+coroutine.wrap(AMMQF_fake_script)()
+local function JTNVMVY_fake_script() -- BUTTON.LocalScript 
 	local script = Instance.new('LocalScript', BUTTON)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -551,4 +664,4 @@ local function OQYSFY_fake_script() -- BUTTON.LocalScript
 		end
 	end)
 end
-coroutine.wrap(OQYSFY_fake_script)()
+coroutine.wrap(JTNVMVY_fake_script)()
