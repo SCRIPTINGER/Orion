@@ -13,40 +13,31 @@ function RELKINLibrary.CreateLibrary(playerGui)
     Main.Name = "Main"
     Main.Parent = RELKINlibrary
     Main.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
-    Main.Position = UDim2.new(0.373, 0, 0.302, 0)
-    Main.Size = UDim2.new(0.32, 0, 0.8, 0)
+    Main.Position = UDim2.new(0.3, 0, 0.2, 0)
+    Main.Size = UDim2.new(0.4, 0, 0.6, 0)
 
     local UICorner = Instance.new("UICorner", Main)
-
-    -- PlaceHolder Frame
-    local PlaceHolder = Instance.new("Frame")
-    PlaceHolder.Name = "Place Holder"
-    PlaceHolder.Parent = Main
-    PlaceHolder.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    PlaceHolder.Position = UDim2.new(0, 0, 0.1, 0)
-    PlaceHolder.Size = UDim2.new(1, 0, 0.9, 0)
-
-    Instance.new("UICorner", PlaceHolder)
 
     -- Navigation Frame
     local Navgations = Instance.new("ScrollingFrame")
     Navgations.Name = "Navgations"
-    Navgations.Parent = PlaceHolder
+    Navgations.Parent = Main
     Navgations.BackgroundColor3 = Color3.fromRGB(95, 95, 95)
-    Navgations.Size = UDim2.new(0.258, 0, 1, 0)
+    Navgations.Size = UDim2.new(0.25, 0, 1, 0)
     Navgations.CanvasSize = UDim2.new(0, 0, 5, 0)
+    Navgations.ScrollBarThickness = 5
 
-    Instance.new("UICorner", Navgations)
+    local UICornerNav = Instance.new("UICorner", Navgations)
 
     -- Controls Container
     local ControlsContainer = Instance.new("Frame")
     ControlsContainer.Name = "ControlsContainer"
-    ControlsContainer.Parent = PlaceHolder
+    ControlsContainer.Parent = Main
     ControlsContainer.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    ControlsContainer.Size = UDim2.new(0.75, 0, 1, 0)
     ControlsContainer.Position = UDim2.new(0.26, 0, 0, 0)
+    ControlsContainer.Size = UDim2.new(0.74, 0, 1, 0)
 
-    Instance.new("UICorner", ControlsContainer)
+    local UICornerControls = Instance.new("UICorner", ControlsContainer)
 
     -- Таблица для управления вкладками
     RELKINlibrary.Tabs = {}
@@ -59,16 +50,24 @@ end
 
 -- Функция создания вкладки
 function RELKINLibrary.CreateTab(library, tabName)
+    -- Проверяем существование вкладки с таким же именем
+    if library.Tabs[tabName] then
+        warn("Tab with name '" .. tabName .. "' already exists!")
+        return
+    end
+
+    -- Создание кнопки вкладки
     local tabButton = Instance.new("TextButton")
     tabButton.Name = "Tab_" .. tabName
     tabButton.Parent = library.Navgations
     tabButton.BackgroundColor3 = Color3.fromRGB(108, 108, 108)
-    tabButton.Size = UDim2.new(0, 95, 0, 30)
+    tabButton.Size = UDim2.new(0.9, 0, 0, 50)
+    tabButton.Position = UDim2.new(0.05, 0, (#library.Navgations:GetChildren() - 1) * 0.12, 0)
     tabButton.Text = tabName
-    tabButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    tabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     tabButton.TextScaled = true
 
-    Instance.new("UICorner", tabButton)
+    local UICorner = Instance.new("UICorner", tabButton)
 
     -- Создание фрейма для содержимого вкладки
     local tabFrame = Instance.new("Frame")
@@ -78,9 +77,9 @@ function RELKINLibrary.CreateTab(library, tabName)
     tabFrame.Size = UDim2.new(1, 0, 1, 0)
     tabFrame.Visible = false
 
-    Instance.new("UICorner", tabFrame)
+    local UICornerFrame = Instance.new("UICorner", tabFrame)
 
-    -- Добавление функциональности для переключения
+    -- Добавление функциональности для переключения вкладок
     tabButton.MouseButton1Click:Connect(function()
         if library.CurrentTab then
             library.CurrentTab.Visible = false
@@ -92,7 +91,7 @@ function RELKINLibrary.CreateTab(library, tabName)
     -- Добавление новой вкладки в таблицу
     library.Tabs[tabName] = tabFrame
 
-    -- Автоматическое переключение на вкладку, если она первая
+    -- Автоматическое переключение на первую вкладку
     if not library.CurrentTab then
         library.CurrentTab = tabFrame
         tabFrame.Visible = true
@@ -103,17 +102,18 @@ end
 
 -- Функция создания кнопки
 function RELKINLibrary.CreateButton(tabFrame, buttonName, buttonText, onClickCallback)
+    -- Создаем кнопку
     local button = Instance.new("TextButton")
     button.Name = "Button_" .. buttonName
     button.Parent = tabFrame
     button.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
     button.Size = UDim2.new(0.8, 0, 0.1, 0) -- Размер кнопки
-    button.Position = UDim2.new(0.1, 0, (#tabFrame:GetChildren() - 1) * 0.12, 0) -- Динамическое размещение кнопок
+    button.Position = UDim2.new(0.1, 0, (#tabFrame:GetChildren() - 1) * 0.12, 0) -- Динамическое размещение
     button.Text = buttonText
     button.TextColor3 = Color3.fromRGB(255, 255, 255)
     button.TextScaled = true
 
-    Instance.new("UICorner", button)
+    local UICorner = Instance.new("UICorner", button)
 
     -- Подключение функции обратного вызова при нажатии
     button.MouseButton1Click:Connect(function()
