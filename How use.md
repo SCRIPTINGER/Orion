@@ -1,5 +1,5 @@
-# Visual UI Library Documentation
-Gitbook Version: https://mk0-2.gitbook.io/visual-ui-library-documentation
+# RELKIN Library Library Documentation
+
 
 ## Getting Loadstring
 ```lua
