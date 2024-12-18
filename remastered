@@ -2,8 +2,6 @@
 local RELKINLibrary = {}
 
 -- Создание основного интерфейса
-local MakeDraggable = loadstring(game:HttpGet('https://raw.githubusercontent.com/SCRIPTINGER/SKWER-library/refs/heads/main/SD'))()
-
 function RELKINLibrary.CreateLibrary(playerGui)
     local RELKINlibrary = Instance.new("ScreenGui")
     RELKINlibrary.Name = "RELKIN Library"
