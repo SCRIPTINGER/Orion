@@ -1,10 +1,10 @@
 
-local Lib = {}
+local RELKIN_lbrary = {}
 
 local tweenService = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
 
-function Lib:Drag(frame,parent)
+function RELKIN_lbrary:Drag(frame,parent)
 	local UIS = game:GetService('UserInputService')
 	parent = parent or frame
 	local dragToggle = nil
@@ -41,10 +41,10 @@ function Lib:Drag(frame,parent)
 	end)
 end
 
-function Lib.Window(Title)
+function RELKIN_lbrary.Window(Title)
 	Title = Title or "Ui Library"
 
-local RELKINlibrary = Instance.new("ScreenGui")
+local RELKIN_lbrary = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
 local PlaceHolder = Instance.new("Frame")
