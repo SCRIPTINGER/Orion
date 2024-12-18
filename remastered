@@ -55,4 +55,94 @@ function RELKIN:ChangeMenuName(menuFrame, newName)
     end
 end
 
+-- Функция для создания нового окна
+function RELKIN:CreateWindow(windowName, parent)
+    local newWindow = Instance.new("Frame")
+    newWindow.Name = windowName or "NewWindow"
+    newWindow.Parent = parent
+    newWindow.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
+    newWindow.BorderSizePixel = 0
+    newWindow.Size = UDim2.new(0.4, 0, 0.5, 0) -- Размер окна по умолчанию
+    newWindow.Position = UDim2.new(0.3, 0, 0.2, 0)
+
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 10) -- Радиус углов
+    UICorner.Parent = newWindow
+
+    -- Заголовок окна
+    local titleBar = Instance.new("Frame")
+    titleBar.Name = "TitleBar"
+    titleBar.Parent = newWindow
+    titleBar.BackgroundColor3 = Color3.fromRGB(37, 63, 136)
+    titleBar.BorderSizePixel = 0
+    titleBar.Size = UDim2.new(1, 0, 0.1, 0) -- Размер заголовка
+
+    local UICornerTitle = Instance.new("UICorner")
+    UICornerTitle.CornerRadius = UDim.new(0, 10)
+    UICornerTitle.Parent = titleBar
+
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Name = "TitleLabel"
+    titleLabel.Parent = titleBar
+    titleLabel.Text = windowName or "New Window"
+    titleLabel.Font = Enum.Font.Unknown
+    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleLabel.TextScaled = true
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Size = UDim2.new(1, -40, 1, 0)
+    titleLabel.Position = UDim2.new(0.05, 0, 0, 0)
+
+    -- Кнопка закрытия окна
+    local closeButton = Instance.new("TextButton")
+    closeButton.Name = "CloseButton"
+    closeButton.Parent = titleBar
+    closeButton.Text = "X"
+    closeButton.Font = Enum.Font.Unknown
+    closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    closeButton.TextScaled = true
+    closeButton.BackgroundColor3 = Color3.fromRGB(136, 37, 37)
+    closeButton.BorderSizePixel = 0
+    closeButton.Size = UDim2.new(0.1, 0, 1, 0)
+    closeButton.Position = UDim2.new(0.9, 0, 0, 0)
+
+    local UICornerClose = Instance.new("UICorner")
+    UICornerClose.CornerRadius = UDim.new(0, 5)
+    UICornerClose.Parent = closeButton
+
+    closeButton.MouseButton1Click:Connect(function()
+        newWindow:Destroy() -- Закрыть окно
+    end)
+
+    -- Сделать окно перемещаемым
+    local dragging = false
+    local dragStart = nil
+    local startPos = nil
+
+    titleBar.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = newWindow.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if dragging then
+            local delta = game.Players.LocalPlayer:GetMouse().Position - dragStart
+            newWindow.Position = UDim2.new(
+                startPos.X.Scale, startPos.X.Offset + delta.X,
+                startPos.Y.Scale, startPos.Y.Offset + delta.Y
+            )
+        end
+    end)
+
+    return newWindow
+end
+
 return RELKIN
