@@ -1,191 +1,58 @@
-local RELKIN_lbrary = Instance.new("ScreenGui")
-local Main = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local Place_Holder = Instance.new("Frame")
-local UICorner_2 = Instance.new("UICorner")
-local Navgations = Instance.new("ScrollingFrame")
-local UICorner_3 = Instance.new("UICorner")
-local Tab_1 = Instance.new("TextButton")
-local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-local Tab_2 = Instance.new("TextButton")
-local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
-local Controls1 = Instance.new("Frame")
-local UICorner_4 = Instance.new("UICorner")
-local Button = Instance.new("TextButton")
-local UICorner_5 = Instance.new("UICorner")
-local Click = Instance.new("ImageLabel")
-local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
-local UITextSizeConstraint_3 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_6 = Instance.new("UIAspectRatioConstraint")
-local Slider = Instance.new("ScrollingFrame")
-local TextLabel = Instance.new("TextLabel")
-local UITextSizeConstraint_4 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_7 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_8 = Instance.new("UIAspectRatioConstraint")
-local Controls2 = Instance.new("Frame")
-local UICorner_6 = Instance.new("UICorner")
-local Button_2 = Instance.new("TextButton")
-local UICorner_7 = Instance.new("UICorner")
-local Click_2 = Instance.new("ImageLabel")
-local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
-local UITextSizeConstraint_5 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
-local Powered = Instance.new("TextLabel")
-local UICorner_8 = Instance.new("UICorner")
-local UITextSizeConstraint_6 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_12 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_13 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_14 = Instance.new("UIAspectRatioConstraint")
-local TopBar = Instance.new("Frame")
-local UICorner_9 = Instance.new("UICorner")
-local Close = Instance.new("ImageButton")
-local UICorner_10 = Instance.new("UICorner")
-local UIAspectRatioConstraint_15 = Instance.new("UIAspectRatioConstraint")
-local Name = Instance.new("TextLabel")
-local UICorner_11 = Instance.new("UICorner")
-local UITextSizeConstraint_7 = Instance.new("UITextSizeConstraint")
-local UIAspectRatioConstraint_16 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_17 = Instance.new("UIAspectRatioConstraint")
-local MainShadow = Instance.new("ImageLabel")
-local UIAspectRatioConstraint_18 = Instance.new("UIAspectRatioConstraint")
-local mobile = Instance.new("Frame")
-local BUTTON = Instance.new("ImageButton")
-local UICorner_12 = Instance.new("UICorner")
-local UIAspectRatioConstraint_19 = Instance.new("UIAspectRatioConstraint")
-local BUTTONShadow = Instance.new("ImageLabel")
-local mobileShadow = Instance.new("ImageLabel")
-local UIAspectRatioConstraint_20 = Instance.new("UIAspectRatioConstraint")
-local UIAspectRatioConstraint_21 = Instance.new("UIAspectRatioConstraint")
--- RELKIN Library Module
-local RELKINLibrary = {}
+-- RELKIN Library
+local RELKIN = {}
 
--- Создание основного интерфейса
-function RELKINLibrary.CreateLibrary(playerGui)
-    local RELKINlibrary = Instance.new("ScreenGui")
-    RELKINlibrary.Name = "RELKIN Library"
-    RELKINlibrary.ResetOnSpawn = false
-    RELKINlibrary.Parent = playerGui or game.Players.LocalPlayer:WaitForChild("PlayerGui")
+-- Функция для создания новой вкладки (Tab)
+function RELKIN:AddTab(name, parent, onClick)
+    local newTab = Instance.new("TextButton")
+    newTab.Name = name
+    newTab.Parent = parent
+    newTab.BackgroundColor3 = Color3.fromRGB(108, 108, 108)
+    newTab.BackgroundTransparency = 1.000
+    newTab.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    newTab.BorderSizePixel = 0
+    newTab.Size = UDim2.new(0, 95, 0, 30)
+    newTab.Font = Enum.Font.Unknown
+    newTab.Text = name
+    newTab.TextColor3 = Color3.fromRGB(0, 0, 0)
+    newTab.TextScaled = true
+    newTab.TextSize = 14.000
+    newTab.TextWrapped = true
+    newTab.TextXAlignment = Enum.TextXAlignment.Left
 
-    -- Main Frame
-    local Main = Instance.new("Frame")
-    Main.Name = "Main"
-    Main.Parent = RELKINlibrary
-    Main.BackgroundColor3 = Color3.fromRGB(67, 67, 67)
-    Main.Position = UDim2.new(0.3, 0, 0.2, 0)
-    Main.Size = UDim2.new(0.4, 0, 0.6, 0)
+    local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+    UITextSizeConstraint.MaxTextSize = 30
+    UITextSizeConstraint.Parent = newTab
 
-    local UICorner = Instance.new("UICorner", Main)
+    local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+    UIAspectRatioConstraint.AspectRatio = 3.167
+    UIAspectRatioConstraint.Parent = newTab
 
-    -- Navigation Frame
-    local Navgations = Instance.new("ScrollingFrame")
-    Navgations.Name = "Navgations"
-    Navgations.Parent = Main
-    Navgations.BackgroundColor3 = Color3.fromRGB(95, 95, 95)
-    Navgations.Size = UDim2.new(0.25, 0, 1, 0)
-    Navgations.CanvasSize = UDim2.new(0, 0, 5, 0)
-    Navgations.ScrollBarThickness = 5
-
-    local UICornerNav = Instance.new("UICorner", Navgations)
-
-    -- Controls Container
-    local ControlsContainer = Instance.new("Frame")
-    ControlsContainer.Name = "ControlsContainer"
-    ControlsContainer.Parent = Main
-    ControlsContainer.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    ControlsContainer.Position = UDim2.new(0.26, 0, 0, 0)
-    ControlsContainer.Size = UDim2.new(0.74, 0, 1, 0)
-
-    local UICornerControls = Instance.new("UICorner", ControlsContainer)
-
-    -- Таблица для управления вкладками
-    RELKINlibrary.Tabs = {}
-    RELKINlibrary.CurrentTab = nil
-    RELKINlibrary.Navgations = Navgations
-    RELKINlibrary.ControlsContainer = ControlsContainer
-
-    return RELKINlibrary
-end
-
--- Функция создания вкладки
-function RELKINLibrary.CreateTab(library, tabName)
-    -- Проверяем существование вкладки с таким же именем
-    if library.Tabs[tabName] then
-        warn("Tab with name '" .. tabName .. "' already exists!")
-        return
-    end
-
-    -- Создание кнопки вкладки
-    local tabButton = Instance.new("TextButton")
-    tabButton.Name = "Tab_" .. tabName
-    tabButton.Parent = library.Navgations
-    tabButton.BackgroundColor3 = Color3.fromRGB(108, 108, 108)
-    tabButton.Size = UDim2.new(0.9, 0, 0, 50)
-    tabButton.Position = UDim2.new(0.05, 0, (#library.Navgations:GetChildren() - 1) * 0.12, 0)
-    tabButton.Text = tabName
-    tabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    tabButton.TextScaled = true
-
-    local UICorner = Instance.new("UICorner", tabButton)
-
-    -- Создание фрейма для содержимого вкладки
-    local tabFrame = Instance.new("Frame")
-    tabFrame.Name = "TabFrame_" .. tabName
-    tabFrame.Parent = library.ControlsContainer
-    tabFrame.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-    tabFrame.Size = UDim2.new(1, 0, 1, 0)
-    tabFrame.Visible = false
-
-    local UICornerFrame = Instance.new("UICorner", tabFrame)
-
-    -- Добавление функциональности для переключения вкладок
-    tabButton.MouseButton1Click:Connect(function()
-        if library.CurrentTab then
-            library.CurrentTab.Visible = false
-        end
-        library.CurrentTab = tabFrame
-        tabFrame.Visible = true
-    end)
-
-    -- Добавление новой вкладки в таблицу
-    library.Tabs[tabName] = tabFrame
-
-    -- Автоматическое переключение на первую вкладку
-    if not library.CurrentTab then
-        library.CurrentTab = tabFrame
-        tabFrame.Visible = true
-    end
-
-    return tabFrame
-end
-
--- Функция создания кнопки
-function RELKINLibrary.CreateButton(tabFrame, buttonName, buttonText, onClickCallback)
-    -- Создаем кнопку
-    local button = Instance.new("TextButton")
-    button.Name = "Button_" .. buttonName
-    button.Parent = tabFrame
-    button.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
-    button.Size = UDim2.new(0.8, 0, 0.1, 0) -- Размер кнопки
-    button.Position = UDim2.new(0.1, 0, (#tabFrame:GetChildren() - 1) * 0.12, 0) -- Динамическое размещение
-    button.Text = buttonText
-    button.TextColor3 = Color3.fromRGB(255, 255, 255)
-    button.TextScaled = true
-
-    local UICorner = Instance.new("UICorner", button)
-
-    -- Подключение функции обратного вызова при нажатии
-    button.MouseButton1Click:Connect(function()
-        if onClickCallback then
-            onClickCallback()
+    -- Добавляем функцию-обработчик для клика по вкладке
+    newTab.MouseButton1Click:Connect(function()
+        if onClick then
+            onClick(newTab)
         end
     end)
 
-    return button
+    return newTab
 end
 
-return RELKINLibrary
+-- Функция для изменения текста кнопки
+function RELKIN:ChangeButtonText(button, newText)
+    if button and button:IsA("TextButton") then
+        button.Text = newText
+    else
+        warn("Указанный объект не является кнопкой или недоступен.")
+    end
+end
+
+-- Функция для изменения названия меню
+function RELKIN:ChangeMenuName(menuFrame, newName)
+    if menuFrame and menuFrame:FindFirstChild("Name") then
+        menuFrame.Name.Text = newName
+    else
+        warn("Не удалось найти элемент для изменения названия.")
+    end
+end
+
+return RELKIN
